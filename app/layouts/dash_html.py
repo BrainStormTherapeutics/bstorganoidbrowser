@@ -83,7 +83,14 @@ main_layout = html.Div([
     }),
 
     # Graph Section
-    dcc.Graph(id='tsne-plot', style={'margin': '0 auto', 'width': '80%'}),
+    dcc.Graph(
+        id='tsne-plot',
+        style={
+            'margin': '0 auto',
+            'width': '80%',
+            'height': '800px'
+        }
+    ),
 
     # Gene List Section (hidden by default)
     html.Div(

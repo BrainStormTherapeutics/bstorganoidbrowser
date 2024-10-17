@@ -29,7 +29,7 @@ def update_plot(data, annotations):
             x=data['x'],
             y=data['y'],
             mode='markers',
-            marker=dict(color=data['color'], size=6, opacity=0.75),
+            marker=dict(color=data['color'], size=4, opacity=0.75),
             hovertext=data['gene'],
             hoverinfo='text'
         ))
@@ -62,13 +62,24 @@ def update_plot(data, annotations):
                 gene_list = html.Ul([html.Li(g) for g in matched_genes['gene']])
                 display_style = {'display': 'block', 'margin-top': '20px', 'text-align': 'center'}
 
+        # Adjust Y-axis range
+        y_min, y_max = data['y'].min(), data['y'].max()
+        y_range = y_max - y_min
+        new_y_min = y_min - 0.25 * y_range
+        new_y_max = y_max + 0.25 * y_range
+
+        # Update layout with new axis range and styling
         fig.update_layout(
             title='t-SNE Plot with Gene Labels',
             title_font=dict(size=24, family='Arial'),
             xaxis_title='X axis',
             yaxis_title='Y axis',
             xaxis=dict(showgrid=False, zeroline=False),
-            yaxis=dict(showgrid=False, zeroline=False),
+            yaxis=dict(
+                showgrid=False,
+                zeroline=False,
+                range=[new_y_min, new_y_max]
+            ),
             plot_bgcolor='rgba(0,0,0,0)',
             showlegend=False
         )
