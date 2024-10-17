@@ -1,5 +1,7 @@
 from dash import html
 
+import pandas as pd
+
 import plotly.graph_objs as go
 import plotly.express as px
 
@@ -7,7 +9,7 @@ import plotly.express as px
 def update_plot(data, annotations):
     """Update the t-SNE plot based on the input parameters."""
     def callback(gene_search, color_scale):
-
+        # Set default color to black
         data['color'] = 'black'
 
         # Coloring for 'sig'
@@ -43,7 +45,20 @@ def update_plot(data, annotations):
                 font=dict(color='red', size=14)
             )
 
-        # Search input
+        # Load and filter extra annotations
+        extra_annotations = pd.read_csv('app/files/inputfile2.txt', sep='\t', header=None)
+        extra_annotations.columns = ['label', 'x', 'y']
+        extra_annotations = extra_annotations.dropna()  # Remove rows with NaN values
+
+        for _, row in extra_annotations.iterrows():
+            fig.add_annotation(
+                x=row['x'],
+                y=row['y'],
+                text=row['label'],
+                showarrow=False,
+                font=dict(color='red', size=14)
+            )
+
         gene_list = []
         display_style = {'display': 'none'}
 
