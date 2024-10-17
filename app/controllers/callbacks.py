@@ -22,8 +22,8 @@ def update_plot(data, annotations):
 
         # Create or reuse the figure
         if current_figure:
-            fig = go.Figure(current_figure)  # Reuse existing figure
-            fig.update_traces(marker=dict(color=data['color']))  # Update marker colors
+            fig = go.Figure(current_figure)
+            fig.update_traces(marker=dict(color=data['color']))
         else:
             # Create a new figure with updated colors
             fig = go.Figure(data=go.Scatter(
@@ -64,12 +64,17 @@ def update_plot(data, annotations):
 
         # Initialize the list of genes to display
         gene_list_items = []
+        selected_count = 0
 
-        # Handle lasso selection
+        # Handle lasso selection with filtering
         if selected_data and 'points' in selected_data:
             selected_genes = [
-                pt.get('hovertext', 'No Label') for pt in selected_data['points']
+                pt.get('hovertext', None) for pt in selected_data['points']
             ]
+            # Filter out None values
+            selected_genes = [gene for gene in selected_genes if gene]
+            selected_count = len(selected_genes)
+
             if selected_genes:
                 # Add selected points to the figure
                 fig.add_trace(go.Scatter(
@@ -77,7 +82,7 @@ def update_plot(data, annotations):
                     y=[pt['y'] for pt in selected_data['points']],
                     mode='markers+text',
                     marker=dict(color='green', size=10),
-                    text=[pt.get('hovertext', '') for pt in selected_data['points']],
+                    text=selected_genes,
                     textposition='top center'
                 ))
                 # Add selected genes to the list below the graph
@@ -98,7 +103,19 @@ def update_plot(data, annotations):
                 # Add matched genes to the list
                 gene_list_items.extend([html.Li(g) for g in matched_genes['gene']])
 
-        gene_list = html.Ul(gene_list_items)
+        # Create the HTML list component with the selected count
+        gene_list = html.Div([
+            html.P(f"Selected Points: {selected_count}", style={'font-weight': 'bold'}),
+            html.Ul(
+                gene_list_items,
+                style={
+                    'overflow-y': 'scroll',
+                    'height': '300px',
+                    'margin-top': '10px',
+                    'text-align': 'center'
+                }
+            )
+        ])
 
         display_style = {
             'display': 'block', 'margin-top': '20px', 'text-align': 'center'
