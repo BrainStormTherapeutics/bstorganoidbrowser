@@ -1,0 +1,42 @@
+# Bytecode files and cache directories
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment directories
+env/
+venv/
+.venv/
+
+# IDE and editor configuration files
+.vscode/
+.idea/
+
+# Logs and cache files
+*.log
+*.cache
+*.coverage
+*.pytest_cache/
+
+# Build artifacts and distribution packages
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Temporary files and configuration from tests
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+
+# pip and pipenv related files
+pip-log.txt
+pip-delete-this-directory.txt
+Pipfile.lock
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Sensitive information (e.g., environment variables, keys)
+.env
