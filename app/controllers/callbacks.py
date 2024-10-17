@@ -1,15 +1,13 @@
 from dash import html
 
 import pandas as pd
-
 import plotly.graph_objs as go
 import plotly.express as px
 
 
 def update_plot(data, annotations):
-    """Update the t-SNE plot based on the input parameters."""
-    def callback(gene_search, color_scale):
-        # Set default color to black
+    def callback(gene_search, color_scale, selected_data, current_figure):
+        # Default color to black
         data['color'] = 'black'
 
         # Coloring for 'sig'
@@ -19,48 +17,71 @@ def update_plot(data, annotations):
 
         # Coloring for 'fc'
         elif color_scale == 'fc':
-            if data['fc'].max() == data['fc'].min():
-                norm_fc = (data['fc'] - data['fc'].min())
-            else:
-                norm_fc = (data['fc'] - data['fc'].min()) / (data['fc'].max() - data['fc'].min())
-
-            # Use RdBu colorscale for normalized values
+            norm_fc = (data['fc'] - data['fc'].min()) / (data['fc'].max() - data['fc'].min() + 1e-9)
             data['color'] = px.colors.sample_colorscale('RdBu', norm_fc)
 
-        fig = go.Figure(data=go.Scatter(
-            x=data['x'],
-            y=data['y'],
-            mode='markers',
-            marker=dict(color=data['color'], size=4, opacity=0.75),
-            hovertext=data['gene'],
-            hoverinfo='text'
-        ))
+        # Create or reuse the figure
+        if current_figure:
+            fig = go.Figure(current_figure)  # Reuse existing figure
+            fig.update_traces(marker=dict(color=data['color']))  # Update marker colors
+        else:
+            # Create a new figure with updated colors
+            fig = go.Figure(data=go.Scatter(
+                x=data['x'],
+                y=data['y'],
+                mode='markers',
+                marker=dict(color=data['color'], size=4, opacity=0.75),
+                hovertext=data['gene'],
+                hoverinfo='text'
+            ))
 
-        for _, row in annotations.iterrows():
-            fig.add_annotation(
-                x=row['x'],
-                y=row['y'],
-                text=row['label'],
-                showarrow=False,
-                font=dict(color='red', size=14)
-            )
+        # Add annotations only if the figure is new
+        if not current_figure:
+            for _, row in annotations.iterrows():
+                fig.add_annotation(
+                    x=row['x'],
+                    y=row['y'],
+                    text=row['label'],
+                    showarrow=False,
+                    font=dict(
+                        color='red', size=18, family='Arial', weight='bold'
+                    )
+                )
 
-        # Load and filter extra annotations
-        extra_annotations = pd.read_csv('app/files/inputfile2.txt', sep='\t', header=None)
-        extra_annotations.columns = ['label', 'x', 'y']
-        extra_annotations = extra_annotations.dropna()  # Remove rows with NaN values
+            # Load and add additional annotations from inputfile2.txt
+            extra_annotations = pd.read_csv('app/files/inputfile2.txt', sep='\t', header=None)
+            extra_annotations.columns = ['label', 'x', 'y']
+            extra_annotations = extra_annotations.dropna()
 
-        for _, row in extra_annotations.iterrows():
-            fig.add_annotation(
-                x=row['x'],
-                y=row['y'],
-                text=row['label'],
-                showarrow=False,
-                font=dict(color='red', size=14)
-            )
+            for _, row in extra_annotations.iterrows():
+                fig.add_annotation(
+                    x=row['x'],
+                    y=row['y'],
+                    text=row['label'],
+                    showarrow=False,
+                    font=dict(color='red', size=14)
+                )
 
-        gene_list = []
-        display_style = {'display': 'none'}
+        # Initialize the list of genes to display
+        gene_list_items = []
+
+        # Handle lasso selection
+        if selected_data and 'points' in selected_data:
+            selected_genes = [
+                pt.get('hovertext', 'No Label') for pt in selected_data['points']
+            ]
+            if selected_genes:
+                # Add selected points to the figure
+                fig.add_trace(go.Scatter(
+                    x=[pt['x'] for pt in selected_data['points']],
+                    y=[pt['y'] for pt in selected_data['points']],
+                    mode='markers+text',
+                    marker=dict(color='green', size=10),
+                    text=[pt.get('hovertext', '') for pt in selected_data['points']],
+                    textposition='top center'
+                ))
+                # Add selected genes to the list below the graph
+                gene_list_items.extend([html.Li(gene) for gene in selected_genes])
 
         if gene_search:
             search_genes = [gene.strip().lower() for gene in gene_search.split(',')]
@@ -74,16 +95,22 @@ def update_plot(data, annotations):
                     text=matched_genes['gene'],
                     textposition='top center'
                 ))
-                gene_list = html.Ul([html.Li(g) for g in matched_genes['gene']])
-                display_style = {'display': 'block', 'margin-top': '20px', 'text-align': 'center'}
+                # Add matched genes to the list
+                gene_list_items.extend([html.Li(g) for g in matched_genes['gene']])
 
-        # Adjust Y-axis range
+        gene_list = html.Ul(gene_list_items)
+
+        display_style = {
+            'display': 'block', 'margin-top': '20px', 'text-align': 'center'
+        } if gene_list_items else {'display': 'none'}
+
+        # Adjust Y-axis range with padding
         y_min, y_max = data['y'].min(), data['y'].max()
         y_range = y_max - y_min
         new_y_min = y_min - 0.25 * y_range
         new_y_max = y_max + 0.25 * y_range
 
-        # Update layout with new axis range and styling
+        # Update the layout of the figure
         fig.update_layout(
             title='t-SNE Plot with Gene Labels',
             title_font=dict(size=24, family='Arial'),

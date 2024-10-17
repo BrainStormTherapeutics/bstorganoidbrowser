@@ -1,6 +1,6 @@
 import dash
 
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 
 from app.utils.utils import load_gene_data, load_annotations, filter_valid_annotations
 from app.layouts.dash_html import main_layout
@@ -14,10 +14,10 @@ annotations = filter_valid_annotations(load_annotations(annotations_path))
 app = dash.Dash(__name__)
 app.layout = main_layout
 
-# Assign callback by passing the update function
 app.callback(
     [Output('tsne-plot', 'figure'), Output('gene-list', 'children'), Output('gene-list', 'style')],
-    [Input('gene-search', 'value'), Input('color-scale', 'value')]
+    [Input('gene-search', 'value'), Input('color-scale', 'value'), Input('tsne-plot', 'selectedData')],
+    [State('tsne-plot', 'figure')]
 )(update_plot(data, annotations))
 
 

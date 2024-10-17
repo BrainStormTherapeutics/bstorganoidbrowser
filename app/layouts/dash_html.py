@@ -85,11 +85,17 @@ main_layout = html.Div([
     # Graph Section
     dcc.Graph(
         id='tsne-plot',
+        config={
+            'displayModeBar': True,
+            'modeBarButtonsToAdd': ['lasso2d', 'select2d'],
+        },
         style={
             'margin': '0 auto',
             'width': '80%',
             'height': '800px'
-        }
+        },
+        clear_on_unhover=False,
+        figure={}
     ),
 
     # Gene List Section (hidden by default)
