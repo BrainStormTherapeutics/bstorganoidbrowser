@@ -1,14 +1,16 @@
 from dash import html
 
 import pandas as pd
+import seaborn as sns
 import plotly.graph_objs as go
 import plotly.express as px
+import matplotlib.colors as mcolors
 
 
 def update_plot(data, annotations):
     def callback(gene_search, color_scale, selected_data, current_figure):
-        # Default color to black
-        data['color'] = 'black'
+        # Default color to gray
+        data['color'] = 'gray'
 
         # Coloring for 'sig'
         if color_scale == 'sig':
@@ -19,6 +21,24 @@ def update_plot(data, annotations):
         elif color_scale == 'fc':
             norm_fc = (data['fc'] - data['fc'].min()) / (data['fc'].max() - data['fc'].min() + 1e-9)
             data['color'] = px.colors.sample_colorscale('RdBu', norm_fc)
+
+        # Coloring for 'cluster'
+        elif color_scale == 'cluster':
+             # Get unique clusters
+            unique_clusters = data['cluster'].unique()
+
+            # Generate a color palette for the number of unique clusters
+            palette = sns.color_palette("hsv", len(unique_clusters))  # Or use 'tab10', 'Set2', etc.
+
+            # Convert RGB tuples from the palette to hex format
+            hex_palette = [mcolors.to_hex(c) for c in palette]
+
+            # Create a mapping of each unique cluster to a color in hex format
+            color_map = {cluster: hex_palette[i] for i, cluster in enumerate(unique_clusters)}
+
+            # Assign colors to the 'color' column based on the cluster
+            data['color'] = data['cluster'].map(color_map)
+         
 
         # Create or reuse the figure
         if current_figure:
@@ -44,23 +64,27 @@ def update_plot(data, annotations):
                     text=row['label'],
                     showarrow=False,
                     font=dict(
-                        color='red', size=18, family='Arial', weight='bold'
-                    )
-                )
+                        color='#5F5F5F', size=18, family='Arial'
+                    ),
+                    bordercolor='black',  # Color of the square border
+                    borderwidth=2,  # Thickness of the border
+                    bgcolor="rgba(255, 255, 255, 0.7)",  # Background color with 0.7 alpha
+                    borderpad=4  # Padding between the text and border
+                )                
 
             # Load and add additional annotations from inputfile2.txt
-            extra_annotations = pd.read_csv('app/files/inputfile2.txt', sep='\t', header=None)
+            extra_annotations = pd.read_csv('app/files/scgpt_br_ft_sel_network_anno.txt', sep='\t')
             extra_annotations.columns = ['label', 'x', 'y']
             extra_annotations = extra_annotations.dropna()
 
-            for _, row in extra_annotations.iterrows():
-                fig.add_annotation(
-                    x=row['x'],
-                    y=row['y'],
-                    text=row['label'],
-                    showarrow=False,
-                    font=dict(color='red', size=14)
-                )
+            #for _, row in extra_annotations.iterrows():
+            #    fig.add_annotation(
+            #        x=row['x'],
+            #        y=row['y'],
+            #        text=row['label'],
+            #        showarrow=False,
+            #        font=dict(color='red', size=14)
+            #    )
 
         # Initialize the list of genes to display
         gene_list_items = []
@@ -129,7 +153,7 @@ def update_plot(data, annotations):
 
         # Update the layout of the figure
         fig.update_layout(
-            title='t-SNE Plot with Gene Labels',
+            title='',
             title_font=dict(size=24, family='Arial'),
             xaxis_title='X axis',
             yaxis_title='Y axis',

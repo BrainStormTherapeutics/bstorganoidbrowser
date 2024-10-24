@@ -9,10 +9,14 @@ from app.controllers.callbacks import update_plot
 
 
 data = load_gene_data(data_path)
-annotations = filter_valid_annotations(load_annotations(annotations_path))
+#annotations = filter_valid_annotations(load_annotations(annotations_path))
+annotations = load_annotations(annotations_path)
 
 app = dash.Dash(__name__)
 app.layout = main_layout
+
+# Expose the Flask instance of the app for Gunicorn
+server = app.server  # This line exposes the Flask server to Gunicorn
 
 app.callback(
     [Output('tsne-plot', 'figure'), Output('gene-list', 'children'), Output('gene-list', 'style')],

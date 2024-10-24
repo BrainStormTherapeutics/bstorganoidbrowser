@@ -2,7 +2,7 @@ from dash import dcc, html
 
 main_layout = html.Div([
     html.H1(
-        "t-SNE Plot with Gene Labels",
+        "Foundation Model-Based Network for Human Midbrain Organoid",
         style={
             'text-align': 'center',
             'font-family': 'Arial',
@@ -56,8 +56,9 @@ main_layout = html.Div([
                 id='color-scale',
                 options=[
                     {'label': 'None', 'value': 'none'},
-                    {'label': 'Significance (sig)', 'value': 'sig'},
-                    {'label': 'FC Gradient', 'value': 'fc'}
+                    {'label': 'Gene Cluster', 'value': 'cluster'},
+                    {'label': 'GBA1-PD vs WT, Organoid, Significance', 'value': 'sig'},
+                    {'label': 'GBA1-PD vs WT, Organoid, FC Gradient', 'value': 'fc'}
                 ],
                 value='none',
                 clearable=False,
