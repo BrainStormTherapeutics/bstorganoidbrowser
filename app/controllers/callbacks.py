@@ -2,6 +2,7 @@ from dash import html
 
 import seaborn as sns
 import plotly.graph_objs as go
+import plotly.express as px
 import matplotlib.colors as mcolors
 
 
@@ -18,12 +19,11 @@ def update_plot(data, annotations):
 
         # Coloring based on different columns
         if color_scale == 'log2foldChange':
-            # # Gradient coloring for 'log2foldChange'
-            # norm_fc = (data['log2foldChange'] - data['log2foldChange'].min()) / (data['log2foldChange'].max() - data['log2foldChange'].min() + 1e-9)
-            # data['color'] = px.colors.sample_colorscale('RdBu', norm_fc)
+            # Normalize log2foldChange values to range between -1 and 1
+            norm_fc = data['log2foldChange'] / (data['log2foldChange'].abs().max() + 1e-9)
 
-            # Color positive values as red and negative values as blue
-            data['color'] = data['log2foldChange'].apply(lambda x: 'red' if x > 0 else 'blue')
+            # Create a color list based on the RdBu colorscale, ensuring blue for negative and red for positive
+            data['color'] = px.colors.sample_colorscale('RdBu', (norm_fc + 1) / 2)  # Rescale to [0, 1] for plotly colorscale
 
         elif color_scale == 'cluster':
             # Get unique clusters and create a color map
@@ -48,7 +48,7 @@ def update_plot(data, annotations):
                 x=data['x'],
                 y=data['y'],
                 mode='markers',
-                marker=dict(color=data['color'], size=4, opacity=0.75),
+                marker=dict(color=data['color'], size=3, opacity=0.75),
                 hovertext=data[gene_column],
                 hoverinfo='text'
             ))
