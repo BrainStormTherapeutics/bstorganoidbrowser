@@ -225,78 +225,112 @@ main_layout = html.Div([
                 html.Div([
                     html.Div([
                         html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/66d75d091b53f75930b05ceb_64b710a4ba09dff54ff3eb90_1544022458569_v2.jpg',
-                            style={'width': '150px', 'height': '150px', 'object-fit': 'cover', 'border-radius': '50%'}
-
+                            src='assets/team/Robert_Fremeau.png',
+                            style={
+                                'width': '150px',
+                                'height': '150px',
+                                'object-fit': 'cover',
+                                'border-radius': '50%'
+                            }
                         ),
                         html.H3("Dr. Robert Fremeau"),
                         html.H4("Founder and CSO"),
                         html.P("Experienced R&D leader with 20+ years experience in academia and industry.")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
+                    ], style={
+                        'text-align': 'center',
+                        'margin-bottom': '40px'
+                    }),
                     html.Div([
                         html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/66d75ad294a13f6e1280388e_1639418176911.jpg',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
+                            src='assets/team/Jun_Yin.png',
+                            style={
+                                'width': '150px',
+                                'height': '150px',
+                                'object-fit': 'cover',
+                                'border-radius': '50%'
+                            }
                         ),
                         html.H3("Dr. Jun Yin"),
                         html.H4("Co-founder and Chief Technology Officer"),
-                        html.P("Scientific leader with 10+ years experience in computational biology and AI")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
+                        html.P("Scientific leader with 10+ years experience in computational biology and AI.")
+                    ], style={
+                        'text-align': 'center',
+                        'margin-bottom': '40px'
+                    }),
                     html.Div([
                         html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/66d75f3397ebd79468188a38_Headshot_2_v2.jpg',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
+                            src='assets/team/Maya_Gosztyla.png',
+                            style={
+                                'width': '150px',
+                                'height': '150px',
+                                'object-fit': 'cover',
+                                'border-radius': '50%'
+                            }
                         ),
                         html.H3("Dr. Maya Gosztyla"),
                         html.H4("Scientist, Organoid Technology"),
-                        html.P("Neurobiologist with 5+ years of experience in cortical organoid disease models and applications of bioinformatics/machine learning in drug discovery")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
+                        html.P("Neurobiologist with 5+ years of experience in cortical organoid disease models and applications of bioinformatics/machine learning in drug discovery.")
+                    ], style={
+                        'text-align': 'center',
+                        'margin-bottom': '40px'
+                    }),
                     html.Div([
                         html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/64c15ca30b89296a51f6b55e_Allyson-Muotri.jpg',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
+                            src='assets/team/Birkan_Gokbag.png',
+                            style={
+                                'width': '150px',
+                                'height': '150px',
+                                'object-fit': 'cover',
+                                'border-radius': '50%'
+                            }
                         ),
-                        html.H3("Dr. Alysson Muotri"),
-                        html.H4("Stem cell and brain organoid pioneer"),
-                        html.P("Created the first human organoid models for neurodevelopmental disorders.")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
+                        html.H3("Dr. Birkan Gokbag"),
+                        html.H4(""),
+                        html.P("5th year PhD Candidate, Ohio State University")
+                    ], style={
+                        'text-align': 'center',
+                        'margin-bottom': '40px'
+                    }),
                     html.Div([
                         html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/64c15cb0554be23d55dd3e4b_James-Treanor.jpg',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
+                            src='assets/team/Anna_Rychkova.png',
+                            style={
+                                'width': '150px',
+                                'height': '150px',
+                                'object-fit': 'cover',
+                                'border-radius': '50%'
+                            }
                         ),
-                        html.H3("Dr. James Treanor"),
-                        html.H4("Experienced Biotech C-Suite Officer"),
-                        html.P("Current BOD, SAB member, and former CEO at ADRx, Inc.")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
+                        html.H3("Dr. Anna Rychkova"),
+                        html.H4(""),
+                        html.P("Former team leader, Alector")
+                    ], style={
+                        'text-align': 'center',
+                        'margin-bottom': '40px'
+                    }),
                     html.Div([
                         html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/6526fc4ddc1434549fc3f168_Mark-Norman.webp',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
+                            src='assets/team/Jens_Schwamborn.png',
+                            style={
+                                'width': '150px',
+                                'height': '150px',
+                                'object-fit': 'cover',
+                                'border-radius': '50%'
+                            }
                         ),
-                        html.H3("Dr. Mark H. Norman"),
-                        html.H4("Innovative medicinal chemist"),
-                        html.P("30+ years of drug discovery and development experience.")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
-                    html.Div([
-                        html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/64c15c7c7b65300978749eba_Edoardo-Marcora.jpg',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
-                        ),
-                        html.H3("Dr. Edoarda Marcora"),
-                        html.H4("Computational biology, software development, and genetics expertise."),
-                        html.P("Professor of Genetics, Genomic Sciences, and Neuroscience, Mount Sinai Icahn School of Medicine; member of the Icahn Genomics Institute")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'}),
-                    html.Div([
-                        html.Img(
-                            src='https://cdn.prod.website-files.com/64a59756747dc7e6d278f60d/64c15c8e3c02982c7c22ebc7_Blake-anson.jpg',
-                            style={'width': '150px', 'height': '150px', 'border-radius': '50%'}
-                        ),
-                        html.H3("Dr. Blake Anson"),
-                        html.H4("Business Development Professional with deep commercial experience"),
-                        html.P("19+ years building new markets and driving paradigm-shifting tools into biopharma, government, and academic organizations.")
-                    ], style={'text-align': 'center', 'margin-bottom': '40px'})
-                ], style={'display': 'grid', 'grid-template-columns': 'repeat(auto-fit, minmax(300px, 1fr))', 'gap': '20px', 'justify-items': 'center'})
+                        html.H3("Dr. Jens Schwamborn"),
+                        html.H4(""),
+                        html.P("Professor, University of Luxembourg; Co-Founder, OrganoTherapeutics")
+                    ], style={
+                        'text-align': 'center',
+                        'margin-bottom': '40px'
+                    }),
+                ], style={
+                    'display': 'grid',
+                    'grid-template-columns': 'repeat(auto-fit, minmax(300px, 1fr))',
+                    'gap': '20px',
+                    'justify-items': 'center'
+                })
             ])
         ])
     ])
