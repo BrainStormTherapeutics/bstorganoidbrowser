@@ -38,21 +38,25 @@ main_layout = html.Div([
     dcc.Tabs([
         dcc.Tab(label='About Us', children=[
             html.Div([
-                html.H2("About Us", style={'text-align': 'center'}),
-                html.P(
-                    [
-                        "Parkinson’s disease lacks effective disease-modifying therapies. ",
-                        "We developed a cutting-edge patient-derived organoid platform combined with a Foundation Model-based network for PD therapy discovery. Visit us at ",
-                        html.A(
-                            "BrainStorm Therapeutics",
-                            href="https://www.brainstormtherapeutics.org/",  # Replace with the correct URL for BrainStorm Therapeutics
-                            target="_blank",  # Opens the link in a new tab
-                            style={'text-decoration': 'underline', 'color': 'blue'}  # Style for the link
-                        ),
-                        "."
-                    ],
-                    style={'font-family': 'Arial', 'font-size': '18px', 'margin': '20px', 'text-align': 'justify'}
-                ),
+                #html.H2("About Us", style={'text-align': 'center'}),
+                html.P([
+                    "Parkinson’s disease (PD) is the second most common neurodegenerative disorder, affecting over 10 million people globally, with over 90,000 new cases diagnosed annually in the U.S. Conventional drug discovery has yet to produce safe and effective disease-modifying therapies that prevent dopamine neuron degeneration and slow PD progression.",
+                    html.Br(),
+                    html.Br(),                    
+                    "Our project introduces a cutting-edge midbrain organoid platform derived from Parkinson’s patients, combined with a Foundation Model-based network analysis protocol. This platform enables clearer profiling of disease mechanisms, accelerating the discovery of novel therapeutic targets, identifying biomarkers, and improving patient stratification for clinical trials.",                    
+                    html.Br(),
+                    html.Br(), 
+                    "Visit us at ",
+                    html.A(
+                        "BrainStorm Therapeutics",
+                        href="https://www.brainstormtherapeutics.org/",  # Replace with the correct URL for BrainStorm Therapeutics
+                        target="_blank",  # Opens the link in a new tab
+                        style={'text-decoration': 'underline', 'color': 'blue'}  # Style for the link
+                    ),
+                    "."
+                ],
+                style={'font-family': 'Arial', 'font-size': '18px', 'margin': '20px', 'text-align': 'justify'}
+            ),
                 html.Div(
                     html.Img(
                         src='assets/about_us/about_us_photo_1.png',
@@ -229,7 +233,7 @@ main_layout = html.Div([
         ]),
         dcc.Tab(label='Team', children=[
             html.Div([
-                html.H2("Bio x ML Hackathon BST Team", style={'text-align': 'center', 'margin-bottom': '30px'}),
+                html.H2("Team BST, Bio x ML Hackathon", style={'text-align': 'center', 'margin-bottom': '30px'}),
                 html.Div([
                     html.Div([
                         html.Img(
@@ -242,7 +246,7 @@ main_layout = html.Div([
                             }
                         ),
                         html.H3("Dr. Robert Fremeau"),
-                        html.H4("Founder and CSO"),
+                        html.H4("Founder and CSO, BrainStorm Therapeutics"),                       
                         html.P("Experienced R&D leader with 20+ years experience in academia and industry.")
                     ], style={
                         'text-align': 'center',
@@ -259,7 +263,7 @@ main_layout = html.Div([
                             }
                         ),
                         html.H3("Dr. Jun Yin"),
-                        html.H4("Co-founder and Chief Technology Officer"),
+                        html.H4("Co-founder and CTO, BrainStorm Therapeutics"),
                         html.P("Scientific leader with 10+ years experience in computational biology and AI.")
                     ], style={
                         'text-align': 'center',
@@ -276,7 +280,7 @@ main_layout = html.Div([
                             }
                         ),
                         html.H3("Dr. Maya Gosztyla"),
-                        html.H4("Scientist, Organoid Technology"),
+                        html.H4("Scientist, Organoid Technology, BrainStorm Therapeutics"),
                         html.P("Neurobiologist with 5+ years of experience in cortical organoid disease models and applications of bioinformatics/machine learning in drug discovery.")
                     ], style={
                         'text-align': 'center',
