@@ -1,14 +1,35 @@
 from dash import dcc, html
 
 main_layout = html.Div([
-    html.H1(
-        "Foundation Model-Based Network for Human Midbrain Organoid",
-        style={
-            'text-align': 'center',
-            'font-family': 'Arial',
-            'font-size': '32px'
-        }
-    ),
+    # Header Section with BrainStorm ICON and Title
+    html.Div([
+        html.A(
+            html.Img(
+                src="https://cdn.prod.website-files.com/64a59756747dc7e6d278f5c3/64b5a1d57f2421194d49e869_BST-Logo.png",
+                style={
+                    'height': '60px',
+                    'margin-right': '20px',
+                    'vertical-align': 'middle'
+                }
+            ),
+            href="https://www.brainstormtherapeutics.org/",
+            target="_blank"  # Open the link in a new tab
+        ),
+        html.H1(
+            "Leveraging Foundation Model-Based Organoid Networks for CNS Drug Discovery",
+            style={
+                'display': 'inline-block',
+                'vertical-align': 'middle',
+                'font-family': 'Arial',
+                'font-size': '32px'
+            }
+        ),
+    ], style={
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'center',
+        'margin-bottom': '30px'
+    }),
 
     # Wrapper Div with Flexbox layout for horizontal alignment
     html.Div([
