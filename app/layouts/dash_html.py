@@ -19,7 +19,7 @@ main_layout = html.Div([
             target="_blank"
         ),
         html.H1(
-            "Leveraging Foundation Model-Based Organoid Networks for CNS Drug Discovery",
+            "Leveraging Foundation Model-Based Organoid Gene Networks for CNS Drug Discovery",
             style={
                 'display': 'inline-block',
                 'vertical-align': 'middle',
@@ -40,10 +40,17 @@ main_layout = html.Div([
             html.Div([
                 html.H2("About Us", style={'text-align': 'center'}),
                 html.P(
-                    """
-                    Parkinson’s disease lacks effective disease-modifying therapies. 
-                    We developed a cutting-edge patient-derived organoid platform combined with a Foundation Model-based network for PD therapy discovery.
-                    """,
+                    [
+                        "Parkinson’s disease lacks effective disease-modifying therapies. ",
+                        "We developed a cutting-edge patient-derived organoid platform combined with a Foundation Model-based network for PD therapy discovery. Visit us at ",
+                        html.A(
+                            "BrainStorm Therapeutics",
+                            href="https://www.brainstormtherapeutics.org/",  # Replace with the correct URL for BrainStorm Therapeutics
+                            target="_blank",  # Opens the link in a new tab
+                            style={'text-decoration': 'underline', 'color': 'blue'}  # Style for the link
+                        ),
+                        "."
+                    ],
                     style={'font-family': 'Arial', 'font-size': '18px', 'margin': '20px', 'text-align': 'justify'}
                 ),
                 html.Div(
