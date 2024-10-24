@@ -12,33 +12,30 @@ def update_plot(data, annotations):
         # Default color to gray
         data['color'] = 'gray'
 
-        # Coloring for 'sig'
-        if color_scale == 'sig':
-            color_map = {1: 'red', 0: 'gray', -1: 'blue'}
-            data['color'] = data['sig'].map(color_map)
+        # Define the column that contains gene names
+        gene_column = data.columns[0]
 
-        # Coloring for 'fc'
-        elif color_scale == 'fc':
-            norm_fc = (data['fc'] - data['fc'].min()) / (data['fc'].max() - data['fc'].min() + 1e-9)
+        # Ensure the gene names column contains strings
+        data[gene_column] = data[gene_column].astype(str)
+
+        # Coloring based on different columns
+        if color_scale == 'log2foldChange':
+            # Gradient coloring for 'log2foldChange'
+            norm_fc = (data['log2foldChange'] - data['log2foldChange'].min()) / (data['log2foldChange'].max() - data['log2foldChange'].min() + 1e-9)
             data['color'] = px.colors.sample_colorscale('RdBu', norm_fc)
 
-        # Coloring for 'cluster'
         elif color_scale == 'cluster':
-             # Get unique clusters
+            # Get unique clusters and create a color map
             unique_clusters = data['cluster'].unique()
-
-            # Generate a color palette for the number of unique clusters
-            palette = sns.color_palette("hsv", len(unique_clusters))  # Or use 'tab10', 'Set2', etc.
-
-            # Convert RGB tuples from the palette to hex format
+            palette = sns.color_palette("hsv", len(unique_clusters))
             hex_palette = [mcolors.to_hex(c) for c in palette]
-
-            # Create a mapping of each unique cluster to a color in hex format
             color_map = {cluster: hex_palette[i] for i, cluster in enumerate(unique_clusters)}
-
-            # Assign colors to the 'color' column based on the cluster
             data['color'] = data['cluster'].map(color_map)
-         
+
+        elif color_scale in ['sig', 'sig_DN', 'sig_lrrk2', 'sig_gba1', 'sig_gba1_gl']:
+            # Color by significance columns
+            color_map = {1: 'red', 0: 'gray', -1: 'blue'}
+            data['color'] = data[color_scale].map(color_map)
 
         # Create or reuse the figure
         if current_figure:
@@ -51,7 +48,7 @@ def update_plot(data, annotations):
                 y=data['y'],
                 mode='markers',
                 marker=dict(color=data['color'], size=4, opacity=0.75),
-                hovertext=data['gene'],
+                hovertext=data[gene_column],
                 hoverinfo='text'
             ))
 
@@ -66,25 +63,11 @@ def update_plot(data, annotations):
                     font=dict(
                         color='#5F5F5F', size=18, family='Arial'
                     ),
-                    bordercolor='black',  # Color of the square border
-                    borderwidth=2,  # Thickness of the border
-                    bgcolor="rgba(255, 255, 255, 0.7)",  # Background color with 0.7 alpha
-                    borderpad=4  # Padding between the text and border
-                )                
-
-            # Load and add additional annotations from inputfile2.txt
-            extra_annotations = pd.read_csv('app/files/scgpt_br_ft_sel_network_anno.txt', sep='\t')
-            extra_annotations.columns = ['label', 'x', 'y']
-            extra_annotations = extra_annotations.dropna()
-
-            #for _, row in extra_annotations.iterrows():
-            #    fig.add_annotation(
-            #        x=row['x'],
-            #        y=row['y'],
-            #        text=row['label'],
-            #        showarrow=False,
-            #        font=dict(color='red', size=14)
-            #    )
+                    bordercolor='black',
+                    borderwidth=2,
+                    bgcolor="rgba(255, 255, 255, 0.7)",
+                    borderpad=4
+                )
 
         # Initialize the list of genes to display
         gene_list_items = []
@@ -96,7 +79,7 @@ def update_plot(data, annotations):
                 pt.get('hovertext', None) for pt in selected_data['points']
             ]
             # Filter out None values
-            selected_genes = [gene for gene in selected_genes if gene]
+            selected_genes = [gene for gene in selected_genes if isinstance(gene, str)]
             selected_count = len(selected_genes)
 
             if selected_genes:
@@ -112,20 +95,23 @@ def update_plot(data, annotations):
                 # Add selected genes to the list below the graph
                 gene_list_items.extend([html.Li(gene) for gene in selected_genes])
 
+        # Handle gene search input (now using the gene names)
         if gene_search:
-            search_genes = [gene.strip().lower() for gene in gene_search.split(',')]
-            matched_genes = data[data['gene'].str.lower().isin(search_genes)]
+            search_labels = [label.strip().lower() for label in gene_search.split(',')]
+            if gene_column in data.columns:
+                # Ensure the 'gene' column contains strings
+                matched_labels = data[data[gene_column].str.lower().isin(search_labels)]
 
-            if not matched_genes.empty:
-                fig.add_trace(go.Scatter(
-                    x=matched_genes['x'], y=matched_genes['y'],
-                    mode='markers+text',
-                    marker=dict(color='red', size=10),
-                    text=matched_genes['gene'],
-                    textposition='top center'
-                ))
-                # Add matched genes to the list
-                gene_list_items.extend([html.Li(g) for g in matched_genes['gene']])
+                if not matched_labels.empty:
+                    fig.add_trace(go.Scatter(
+                        x=matched_labels['x'], y=matched_labels['y'],
+                        mode='markers+text',
+                        marker=dict(color='red', size=10),
+                        text=matched_labels[gene_column],
+                        textposition='top center'
+                    ))
+                    # Add matched labels to the list
+                    gene_list_items.extend([html.Li(label) for label in matched_labels[gene_column]])
 
         # Create the HTML list component with the selected count
         gene_list = html.Div([

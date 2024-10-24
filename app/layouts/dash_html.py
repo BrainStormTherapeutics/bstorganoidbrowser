@@ -6,26 +6,26 @@ main_layout = html.Div([
         html.A(
             [
                 html.Img(
-                    src="https://cdn.prod.website-files.com/64a59756747dc7e6d278f5c3/64b5a1d57f2421194d49e869_BST-Logo.png",
+                    src='assets/icon/BrainStormTherapeutics.jpg',
                     style={
                         'height': '60px',
                         'margin-right': '20px',
                         'vertical-align': 'middle'
-                    }
-                ),
-                html.H1(
-                    "Leveraging Foundation Model-Based Organoid Networks for CNS Drug Discovery",
-                    style={
-                        'display': 'inline-block',
-                        'vertical-align': 'middle',
-                        'font-family': 'Arial',
-                        'font-size': '32px'
                     }
                 )
             ],
             href="https://www.brainstormtherapeutics.org/",
             target="_blank"
         ),
+        html.H1(
+            "Leveraging Foundation Model-Based Organoid Networks for CNS Drug Discovery",
+            style={
+                'display': 'inline-block',
+                'vertical-align': 'middle',
+                'font-family': 'Arial',
+                'font-size': '32px'
+            }
+        )
     ], style={
         'display': 'flex',
         'align-items': 'center',
@@ -44,6 +44,19 @@ main_layout = html.Div([
                     We developed a cutting-edge patient-derived organoid platform combined with a Foundation Model-based network for PD therapy discovery.
                     """,
                     style={'font-family': 'Arial', 'font-size': '18px', 'margin': '20px', 'text-align': 'justify'}
+                ),
+                html.Div(
+                    html.Img(
+                        src='assets/about_us/about_us_photo_1.png',
+                        style={
+                            'width': '80%',
+                            'height': 'auto',
+                            'margin': '0 auto',
+                            'display': 'block',
+                            'margin-bottom': '20px'
+                        }
+                    ),
+                    style={'text-align': 'center', 'margin-bottom': '30px'}
                 ),
                 html.Div(
                     [
@@ -123,15 +136,41 @@ main_layout = html.Div([
                         dcc.Dropdown(
                             id='color-scale',
                             options=[
-                                {'label': 'None', 'value': 'none'},
-                                {'label': 'Gene Cluster', 'value': 'cluster'},
-                                {'label': 'GBA1-PD vs WT, Organoid, Significance', 'value': 'sig'},
-                                {'label': 'GBA1-PD vs WT, Organoid, FC Gradient', 'value': 'fc'}
+                                {
+                                    'label': 'None', 'value': 'none'
+                                },
+                                {
+                                    'label': 'Cluster', 'value': 'cluster'
+                                },
+                                {
+                                    'label': 'GBA1-PD vs WT, Whole organoid, FC Gradient',
+                                    'value': 'log2foldChange'
+                                },
+                                {
+                                    'label': 'GBA1-PD vs WT, Whole organoid, Significance',
+                                    'value': 'sig'
+                                },
+                                {
+                                    'label': 'PD vs WT, Dopamine Neuron-human brain, Significance',
+                                    'value': 'sig_DN'
+                                },
+                                {
+                                    'label': 'LRRK2-PD vs WT, Dopamine Neuron-Organoid, Significance',
+                                    'value': 'sig_lrrk2'
+                                },
+                                {
+                                    'label': 'GBA1-PD vs WT, Dopamine Neuron-Organoid, Significance',
+                                    'value': 'sig_gba1'
+                                },
+                                {
+                                    'label': 'GBA1-PD vs WT, Glia-Organoid, Significance',
+                                    'value': 'sig_gba1_gl'
+                                }
                             ],
                             value='none',
                             clearable=False,
                             style={
-                                'width': '300px',
+                                'width': '450px',
                                 'height': '40px',
                                 'font-size': '16px',
                                 'padding': '0',
