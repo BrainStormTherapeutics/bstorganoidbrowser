@@ -150,10 +150,10 @@ main_layout = html.Div([
                                 {
                                     'label': 'Cluster', 'value': 'cluster'
                                 },
-                                {
-                                    'label': 'GBA1-PD vs WT, Whole organoid, FC Gradient',
-                                    'value': 'log2foldChange'
-                                },
+                                #{
+                                #    'label': 'GBA1-PD vs WT, Whole organoid, FC Gradient',
+                                #    'value': 'log2foldChange'
+                                #},
                                 {
                                     'label': 'GBA1-PD vs WT, Whole organoid, Significance',
                                     'value': 'sig'
