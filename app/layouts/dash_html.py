@@ -1,5 +1,6 @@
 from dash import dcc, html
 
+
 main_layout = html.Div([
     # Header Section with BrainStorm ICON and Title
     html.Div([
@@ -221,7 +222,7 @@ main_layout = html.Div([
         ]),
         dcc.Tab(label='Team', children=[
             html.Div([
-                html.H2("Our Team", style={'text-align': 'center'}),
+                html.H2("Bio x ML Hackathon BST Team", style={'text-align': 'center', 'margin-bottom': '30px'}),
                 html.Div([
                     html.Div([
                         html.Img(

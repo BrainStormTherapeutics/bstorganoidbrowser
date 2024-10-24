@@ -2,14 +2,13 @@ import dash
 
 from dash.dependencies import Input, Output, State
 
-from app.utils.utils import load_gene_data, load_annotations, filter_valid_annotations
+from app.utils.utils import load_gene_data, load_annotations
 from app.layouts.dash_html import main_layout
 from app.config import data_path, annotations_path
 from app.controllers.callbacks import update_plot
 
 
 data = load_gene_data(data_path)
-#annotations = filter_valid_annotations(load_annotations(annotations_path))
 annotations = load_annotations(annotations_path)
 
 app = dash.Dash(__name__)

@@ -17,6 +17,4 @@ def load_annotations(file_path=annotations_path):
 
 def filter_valid_annotations(annotations):
     """Filter annotations to keep only valid ones."""
-    #valid_labels = ["Cell Cycle", "Development", "WNT"]
-    #return annotations[annotations['label'].isin(valid_labels)]
     return annotations

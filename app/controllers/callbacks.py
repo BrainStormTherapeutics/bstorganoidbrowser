@@ -1,9 +1,7 @@
 from dash import html
 
-import pandas as pd
 import seaborn as sns
 import plotly.graph_objs as go
-import plotly.express as px
 import matplotlib.colors as mcolors
 
 
@@ -20,9 +18,12 @@ def update_plot(data, annotations):
 
         # Coloring based on different columns
         if color_scale == 'log2foldChange':
-            # Gradient coloring for 'log2foldChange'
-            norm_fc = (data['log2foldChange'] - data['log2foldChange'].min()) / (data['log2foldChange'].max() - data['log2foldChange'].min() + 1e-9)
-            data['color'] = px.colors.sample_colorscale('RdBu', norm_fc)
+            # # Gradient coloring for 'log2foldChange'
+            # norm_fc = (data['log2foldChange'] - data['log2foldChange'].min()) / (data['log2foldChange'].max() - data['log2foldChange'].min() + 1e-9)
+            # data['color'] = px.colors.sample_colorscale('RdBu', norm_fc)
+
+            # Color positive values as red and negative values as blue
+            data['color'] = data['log2foldChange'].apply(lambda x: 'red' if x > 0 else 'blue')
 
         elif color_scale == 'cluster':
             # Get unique clusters and create a color map
