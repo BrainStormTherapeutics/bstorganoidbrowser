@@ -75,7 +75,7 @@ main_layout = html.Div([
                         html.H4("Watch Our Introductory Video", style={'text-align': 'center', 'margin-top': '20px'}),
                         html.Div(
                             html.Iframe(
-                                src="https://youtu.be/dUZ-6mfV-Ww",
+                                src="https://www.youtube.com/embed/dUZ-6mfV-Ww",
                                 style={
                                     'position': 'absolute',
                                     'top': 0,
