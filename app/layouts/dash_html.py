@@ -247,7 +247,13 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Robert Fremeau"),
                         html.H4("Founder and CSO, BrainStorm Therapeutics"),                       
-                        html.P("Experienced R&D leader with 20+ years experience in academia and industry.")
+                        html.P("Experienced R&D leader with 20+ years experience in academia and industry."),
+                        html.A(
+                            "LinkedIn Profile",  # Text for the link
+                            href="https://www.linkedin.com/in/robertfremeau/",  # Replace with the actual LinkedIn URL
+                            target="_blank",  # Opens the link in a new tab
+                            style={'font-size': '16px', 'color': 'blue', 'text-decoration': 'underline', 'margin-top': '10px'}
+                        )                        
                     ], style={
                         'text-align': 'center',
                         'margin-bottom': '40px'
@@ -264,7 +270,13 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Jun Yin"),
                         html.H4("Co-founder and CTO, BrainStorm Therapeutics"),
-                        html.P("Scientific leader with 10+ years experience in computational biology and AI.")
+                        html.P("Scientific leader with 10+ years experience in computational biology and AI."),
+                        html.A(
+                            "LinkedIn Profile",  # Text for the link
+                            href="https://www.linkedin.com/in/yinjun111/",  # Replace with the actual LinkedIn URL
+                            target="_blank",  # Opens the link in a new tab
+                            style={'font-size': '16px', 'color': 'blue', 'text-decoration': 'underline', 'margin-top': '10px'}
+                        )                          
                     ], style={
                         'text-align': 'center',
                         'margin-bottom': '40px'
@@ -281,7 +293,13 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Maya Gosztyla"),
                         html.H4("Scientist, Organoid Technology, BrainStorm Therapeutics"),
-                        html.P("Neurobiologist with 5+ years of experience in cortical organoid disease models and applications of bioinformatics/machine learning in drug discovery.")
+                        html.P("Neurobiologist with 5+ years of experience in cortical organoid disease models and applications of bioinformatics/machine learning in drug discovery."),
+                        html.A(
+                            "LinkedIn Profile",  # Text for the link
+                            href="https://www.linkedin.com/in/mayagosztyla/",  # Replace with the actual LinkedIn URL
+                            target="_blank",  # Opens the link in a new tab
+                            style={'font-size': '16px', 'color': 'blue', 'text-decoration': 'underline', 'margin-top': '10px'}
+                        )  
                     ], style={
                         'text-align': 'center',
                         'margin-bottom': '40px'
@@ -298,7 +316,13 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Birkan Gokbag"),
                         html.H4(""),
-                        html.P("5th year PhD Candidate, Ohio State University")
+                        html.P("5th year PhD Candidate, Ohio State University"),
+                        html.A(
+                            "LinkedIn Profile",  # Text for the link
+                            href="https://www.linkedin.com/in/birkan-gokbag/",  # Replace with the actual LinkedIn URL
+                            target="_blank",  # Opens the link in a new tab
+                            style={'font-size': '16px', 'color': 'blue', 'text-decoration': 'underline', 'margin-top': '10px'}
+                        ) 
                     ], style={
                         'text-align': 'center',
                         'margin-bottom': '40px'
@@ -315,7 +339,13 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Anna Rychkova"),
                         html.H4(""),
-                        html.P("Former team leader, Alector")
+                        html.P("Former team leader, Alector"),
+                        html.A(
+                            "LinkedIn Profile",  # Text for the link
+                            href="https://www.linkedin.com/in/annarychkova/",  # Replace with the actual LinkedIn URL
+                            target="_blank",  # Opens the link in a new tab
+                            style={'font-size': '16px', 'color': 'blue', 'text-decoration': 'underline', 'margin-top': '10px'}
+                        ) 
                     ], style={
                         'text-align': 'center',
                         'margin-bottom': '40px'
@@ -332,7 +362,13 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Jens Schwamborn"),
                         html.H4(""),
-                        html.P("Professor, University of Luxembourg; Co-Founder, OrganoTherapeutics")
+                        html.P("Professor, University of Luxembourg; Co-Founder, OrganoTherapeutics"),
+                        html.A(
+                            "LinkedIn Profile",  # Text for the link
+                            href="https://www.linkedin.com/in/jens-schwamborn-8a350676/",  # Replace with the actual LinkedIn URL
+                            target="_blank",  # Opens the link in a new tab
+                            style={'font-size': '16px', 'color': 'blue', 'text-decoration': 'underline', 'margin-top': '10px'}
+                        ) 
                     ], style={
                         'text-align': 'center',
                         'margin-bottom': '40px'
