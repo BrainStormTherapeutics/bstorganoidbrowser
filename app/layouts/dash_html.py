@@ -339,7 +339,7 @@ main_layout = html.Div([
                         ),
                         html.H3("Dr. Anna Rychkova"),
                         html.H4(""),
-                        html.P("Former team leader, Alector"),
+                        html.P("Physicist, computational chemist and bioinformatician with 10+ years of research experience in computational biology and AI."),
                         html.A(
                             "LinkedIn Profile",  # Text for the link
                             href="https://www.linkedin.com/in/annarychkova/",  # Replace with the actual LinkedIn URL
