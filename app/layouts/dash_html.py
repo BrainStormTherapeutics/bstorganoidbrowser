@@ -246,7 +246,7 @@ main_layout = html.Div([
                             }
                         ),
                         html.H3("Dr. Robert Fremeau"),
-                        html.H4("Founder and CSO, BrainStorm Therapeutics"),                       
+                        html.H4("Founder, CEO/CSO, President, BrainStorm Therapeutics"),                       
                         html.P("Experienced R&D leader with 20+ years experience in academia and industry."),
                         html.A(
                             "LinkedIn Profile",  # Text for the link
